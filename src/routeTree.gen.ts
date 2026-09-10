@@ -15,6 +15,7 @@ import { Route as AuthRouteImport } from './routes/auth'
 import { Route as ContactsRouteImport } from './routes/contacts'
 import { Route as EvaluatorRouteImport } from './routes/evaluator'
 import { Route as PortfolioRouteImport } from './routes/portfolio'
+import { Route as RoadmapRouteImport } from './routes/roadmap'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -46,6 +47,11 @@ const PortfolioRoute = PortfolioRouteImport.update({
   path: '/portfolio',
   getParentRoute: () => rootRouteImport,
 } as any)
+const RoadmapRoute = RoadmapRouteImport.update({
+  id: '/roadmap',
+  path: '/roadmap',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -54,6 +60,7 @@ export interface FileRoutesByFullPath {
   '/contacts': typeof ContactsRoute
   '/evaluator': typeof EvaluatorRoute
   '/portfolio': typeof PortfolioRoute
+  '/roadmap': typeof RoadmapRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -62,6 +69,7 @@ export interface FileRoutesByTo {
   '/contacts': typeof ContactsRoute
   '/evaluator': typeof EvaluatorRoute
   '/portfolio': typeof PortfolioRoute
+  '/roadmap': typeof RoadmapRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -71,13 +79,27 @@ export interface FileRoutesById {
   '/contacts': typeof ContactsRoute
   '/evaluator': typeof EvaluatorRoute
   '/portfolio': typeof PortfolioRoute
+  '/roadmap': typeof RoadmapRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
-    '/' | '/about' | '/auth' | '/contacts' | '/evaluator' | '/portfolio'
+    | '/'
+    | '/about'
+    | '/auth'
+    | '/contacts'
+    | '/evaluator'
+    | '/portfolio'
+    | '/roadmap'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/about' | '/auth' | '/contacts' | '/evaluator' | '/portfolio'
+  to:
+    | '/'
+    | '/about'
+    | '/auth'
+    | '/contacts'
+    | '/evaluator'
+    | '/portfolio'
+    | '/roadmap'
   id:
     | '__root__'
     | '/'
@@ -86,6 +108,7 @@ export interface FileRouteTypes {
     | '/contacts'
     | '/evaluator'
     | '/portfolio'
+    | '/roadmap'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -95,6 +118,7 @@ export interface RootRouteChildren {
   ContactsRoute: typeof ContactsRoute
   EvaluatorRoute: typeof EvaluatorRoute
   PortfolioRoute: typeof PortfolioRoute
+  RoadmapRoute: typeof RoadmapRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -141,6 +165,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PortfolioRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/roadmap': {
+      id: '/roadmap'
+      path: '/roadmap'
+      fullPath: '/roadmap'
+      preLoaderRoute: typeof RoadmapRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -151,6 +182,7 @@ const rootRouteChildren: RootRouteChildren = {
   ContactsRoute: ContactsRoute,
   EvaluatorRoute: EvaluatorRoute,
   PortfolioRoute: PortfolioRoute,
+  RoadmapRoute: RoadmapRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
