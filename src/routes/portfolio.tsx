@@ -60,7 +60,8 @@ const AP_SUBJECTS = [
 const LEVELS = ["School", "Regional", "National", "International"];
 const PLACEMENTS = ["1st place", "2nd place", "3rd place", "Honorable Mention", "Participant"];
 
-type Row = Record<string, any>;
+/* eslint-disable @typescript-eslint/no-explicit-any */
+type Row = any;
 
 function AuthGate() {
   return (

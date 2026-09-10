@@ -34,7 +34,10 @@ function Contacts() {
     setBusy(true);
     const { error } = await supabase.from("contact_messages").insert(form);
     setBusy(false);
-    if (error) return toast.error("Не удалось отправить сообщение");
+    if (error) {
+      toast.error("Не удалось отправить сообщение");
+      return;
+    }
     toast.success("Сообщение отправлено!");
     setForm({ name: "", email: "", phone: "", message: "" });
   }
