@@ -85,6 +85,7 @@ export type Database = {
       }
       calendar_events: {
         Row: {
+          color: string
           completed: boolean
           created_at: string
           description: string | null
@@ -95,6 +96,7 @@ export type Database = {
           user_id: string
         }
         Insert: {
+          color?: string
           completed?: boolean
           created_at?: string
           description?: string | null
@@ -105,6 +107,7 @@ export type Database = {
           user_id: string
         }
         Update: {
+          color?: string
           completed?: boolean
           created_at?: string
           description?: string | null
@@ -217,7 +220,10 @@ export type Database = {
       }
       profiles: {
         Row: {
+          act_score: number | null
+          annual_budget: number | null
           bio: string | null
+          budget_currency: string | null
           created_at: string
           english_score: string | null
           english_test: string | null
@@ -228,12 +234,19 @@ export type Database = {
           grade_level: string | null
           high_school: string | null
           id: string
+          needs_full_aid: boolean
+          nuet_score: number | null
+          sat_score: number | null
           target_countries: string[]
           target_major: string | null
+          unt_score: number | null
           updated_at: string
         }
         Insert: {
+          act_score?: number | null
+          annual_budget?: number | null
           bio?: string | null
+          budget_currency?: string | null
           created_at?: string
           english_score?: string | null
           english_test?: string | null
@@ -244,12 +257,19 @@ export type Database = {
           grade_level?: string | null
           high_school?: string | null
           id: string
+          needs_full_aid?: boolean
+          nuet_score?: number | null
+          sat_score?: number | null
           target_countries?: string[]
           target_major?: string | null
+          unt_score?: number | null
           updated_at?: string
         }
         Update: {
+          act_score?: number | null
+          annual_budget?: number | null
           bio?: string | null
+          budget_currency?: string | null
           created_at?: string
           english_score?: string | null
           english_test?: string | null
@@ -260,8 +280,12 @@ export type Database = {
           grade_level?: string | null
           high_school?: string | null
           id?: string
+          needs_full_aid?: boolean
+          nuet_score?: number | null
+          sat_score?: number | null
           target_countries?: string[]
           target_major?: string | null
+          unt_score?: number | null
           updated_at?: string
         }
         Relationships: []
