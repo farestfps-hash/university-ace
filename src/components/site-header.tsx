@@ -19,6 +19,7 @@ const NAV = [
   { to: "/evaluator", label: "ИИ-оценка" },
   { to: "/portfolio", label: "Портфолио & AP" },
   { to: "/roadmap", label: "Дорожная карта" },
+  { to: "/universities", label: "Университеты" },
   { to: "/about", label: "О проекте" },
   { to: "/contacts", label: "Контакты" },
 ] as const;
