@@ -183,3 +183,30 @@ export const studymaxChat = createServerFn({ method: "POST" })
 
     return { reply };
   });
+
+export const matchUniversities = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
+  .inputValidator((input: unknown) =>
+    z.object({ catalog: z.array(z.string()).max(60) }).parse(input),
+  )
+  .handler(async ({ data, context }) => {
+    const { supabase, userId } = context as { supabase: Supa; userId: string };
+    const bundle = await loadBundle(supabase, userId);
+
+    const raw = await callGemini([
+      {
+        role: "system",
+        content: `Ты — Studymax AI, эксперт по международным поступлениям.
+Учитывай GPA, AP, олимпиады, активности, стандартизированные тесты (SAT 200-1600, ACT 1-36, ЕНТ/UNT 0-140, NUET) и годовой бюджет на обучение (annual_budget, budget_currency, needs_full_aid — если true, приоритет вузам с полной финансовой помощью или грантом).
+Отвечай СТРОГО валидным JSON без markdown, на русском.
+Схема: {"matches":[{"university":"точное название из списка","country":"USA|Hong Kong|Kazakhstan|Europe","probability": число 0-100,"classification":"Safety|Match|Reach","reason":"1-2 предложения","budget_fit":"комментарий по бюджету и финпомощи"}],"advice":"2-3 предложения общей стратегии"}
+Выбери 9-12 вузов, распределив их по целевым странам абитуриента и по категориям Safety/Match/Reach.`,
+      },
+      {
+        role: "user",
+        content: `Профиль:\n${bundleText(bundle)}\n\nДоступный каталог вузов:\n${data.catalog.join("\n")}`,
+      },
+    ]);
+
+    return parseJson<{ matches: unknown[]; advice: string }>(raw);
+  });
