@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
+import { Checkbox } from "@/components/ui/checkbox";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import {
   Select,
@@ -127,6 +128,13 @@ function Portfolio() {
       target_countries: profile.target_countries ?? [],
       english_test: profile.english_test ?? null,
       english_score: profile.english_score ?? null,
+      sat_score: profile.sat_score ? Number(profile.sat_score) : null,
+      act_score: profile.act_score ? Number(profile.act_score) : null,
+      unt_score: profile.unt_score ? Number(profile.unt_score) : null,
+      nuet_score: profile.nuet_score ? Number(profile.nuet_score) : null,
+      annual_budget: profile.annual_budget ? Number(profile.annual_budget) : null,
+      budget_currency: profile.budget_currency ?? "USD",
+      needs_full_aid: Boolean(profile.needs_full_aid),
       bio: profile.bio ?? null,
     };
     const { error } = await supabase.from("profiles").upsert(payload);
