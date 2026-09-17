@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
+import { Checkbox } from "@/components/ui/checkbox";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import {
   Select,
@@ -127,6 +128,13 @@ function Portfolio() {
       target_countries: profile.target_countries ?? [],
       english_test: profile.english_test ?? null,
       english_score: profile.english_score ?? null,
+      sat_score: profile.sat_score ? Number(profile.sat_score) : null,
+      act_score: profile.act_score ? Number(profile.act_score) : null,
+      unt_score: profile.unt_score ? Number(profile.unt_score) : null,
+      nuet_score: profile.nuet_score ? Number(profile.nuet_score) : null,
+      annual_budget: profile.annual_budget ? Number(profile.annual_budget) : null,
+      budget_currency: profile.budget_currency ?? "USD",
+      needs_full_aid: Boolean(profile.needs_full_aid),
       bio: profile.bio ?? null,
     };
     const { error } = await supabase.from("profiles").upsert(payload);
@@ -277,6 +285,92 @@ function Portfolio() {
                   onChange={(e) => setProfile({ ...profile, english_score: e.target.value })}
                 />
               </Field>
+            </div>
+
+            <div>
+              <Label className="text-sm font-semibold">Стандартизированные тесты</Label>
+              <p className="mt-1 text-xs text-muted-foreground">
+                Все поля необязательны — заполняйте только сданные экзамены.
+              </p>
+              <div className="mt-3 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+                <Field label="SAT (200–1600)">
+                  <Input
+                    type="number"
+                    min={200}
+                    max={1600}
+                    placeholder="1540"
+                    value={profile.sat_score ?? ""}
+                    onChange={(e) => setProfile({ ...profile, sat_score: e.target.value })}
+                  />
+                </Field>
+                <Field label="ACT (1–36)">
+                  <Input
+                    type="number"
+                    min={1}
+                    max={36}
+                    placeholder="34"
+                    value={profile.act_score ?? ""}
+                    onChange={(e) => setProfile({ ...profile, act_score: e.target.value })}
+                  />
+                </Field>
+                <Field label="ЕНТ / UNT (0–140)">
+                  <Input
+                    type="number"
+                    min={0}
+                    max={140}
+                    placeholder="125"
+                    value={profile.unt_score ?? ""}
+                    onChange={(e) => setProfile({ ...profile, unt_score: e.target.value })}
+                  />
+                </Field>
+                <Field label="NUET">
+                  <Input
+                    type="number"
+                    placeholder="Балл"
+                    value={profile.nuet_score ?? ""}
+                    onChange={(e) => setProfile({ ...profile, nuet_score: e.target.value })}
+                  />
+                </Field>
+              </div>
+            </div>
+
+            <div>
+              <Label className="text-sm font-semibold">Бюджет на обучение</Label>
+              <p className="mt-1 text-xs text-muted-foreground">
+                Годовой бюджет — ИИ подберёт вузы с подходящей финансовой помощью.
+              </p>
+              <div className="mt-3 grid gap-4 sm:grid-cols-[1fr_140px]">
+                <Field label="Сумма в год">
+                  <Input
+                    type="number"
+                    min={0}
+                    placeholder="25000"
+                    value={profile.annual_budget ?? ""}
+                    onChange={(e) => setProfile({ ...profile, annual_budget: e.target.value })}
+                  />
+                </Field>
+                <Field label="Валюта">
+                  <Select
+                    value={profile.budget_currency ?? "USD"}
+                    onValueChange={(v) => setProfile({ ...profile, budget_currency: v })}
+                  >
+                    <SelectTrigger>
+                      <SelectValue />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="USD">USD</SelectItem>
+                      <SelectItem value="KZT">KZT</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </Field>
+              </div>
+              <label className="mt-3 flex cursor-pointer items-center gap-2.5 text-sm">
+                <Checkbox
+                  checked={Boolean(profile.needs_full_aid)}
+                  onCheckedChange={(v) => setProfile({ ...profile, needs_full_aid: v === true })}
+                />
+                Нужна полная финансовая помощь / грант
+              </label>
             </div>
 
             <div>

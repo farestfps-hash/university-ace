@@ -66,6 +66,7 @@ function bundleText(bundle: Awaited<ReturnType<typeof loadBundle>>) {
 }
 
 const EVAL_SYSTEM = `Ты — элитный консультант по международным поступлениям (Studymax AI, на базе Gemini).
+В оценке учитывай стандартизированные тесты из профиля: SAT (200-1600), ACT (1-36), ЕНТ/UNT (0-140), NUET, а также годовой бюджет (annual_budget, budget_currency) и флаг needs_full_aid (если true — оценивай только реалистичные варианты с полной финансовой помощью или грантом). Высокие баллы SAT/ACT повышают шансы для USA и Hong Kong, ЕНТ — для Казахстана.
 Оцениваешь профиль школьника по странам: USA (холистическая оценка: строгость AP, глубина лидерства, соответствие активностей мейджору, уникальный нарратив), Hong Kong (количественная строгость: GPA, соответствие AP профилю, минимум 3-4 AP с баллами 4-5, английский), Kazakhstan (олимпиады, GPA, шансы на грант и топ-вузы РК), Europe (эквивалентность AP, пороги GPA, соответствие пререквизитам бакалавриата).
 Отвечай СТРОГО валидным JSON без markdown, на русском языке.
 Схема:
@@ -208,5 +209,8 @@ export const matchUniversities = createServerFn({ method: "POST" })
       },
     ]);
 
-    return parseJson<{ matches: unknown[]; advice: string }>(raw);
+    const parsed = parseJson<{ matches: Array<Record<string, string | number>>; advice: string }>(
+      raw,
+    );
+    return { matches: parsed.matches ?? [], advice: parsed.advice ?? "" };
   });
