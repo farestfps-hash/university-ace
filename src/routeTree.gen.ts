@@ -14,6 +14,7 @@ import { Route as AboutRouteImport } from './routes/about'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as ContactsRouteImport } from './routes/contacts'
 import { Route as EvaluatorRouteImport } from './routes/evaluator'
+import { Route as LeaderboardRouteImport } from './routes/leaderboard'
 import { Route as PortfolioRouteImport } from './routes/portfolio'
 import { Route as RoadmapRouteImport } from './routes/roadmap'
 import { Route as UniversitiesRouteImport } from './routes/universities'
@@ -43,6 +44,11 @@ const EvaluatorRoute = EvaluatorRouteImport.update({
   path: '/evaluator',
   getParentRoute: () => rootRouteImport,
 } as any)
+const LeaderboardRoute = LeaderboardRouteImport.update({
+  id: '/leaderboard',
+  path: '/leaderboard',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const PortfolioRoute = PortfolioRouteImport.update({
   id: '/portfolio',
   path: '/portfolio',
@@ -65,6 +71,7 @@ export interface FileRoutesByFullPath {
   '/auth': typeof AuthRoute
   '/contacts': typeof ContactsRoute
   '/evaluator': typeof EvaluatorRoute
+  '/leaderboard': typeof LeaderboardRoute
   '/portfolio': typeof PortfolioRoute
   '/roadmap': typeof RoadmapRoute
   '/universities': typeof UniversitiesRoute
@@ -75,6 +82,7 @@ export interface FileRoutesByTo {
   '/auth': typeof AuthRoute
   '/contacts': typeof ContactsRoute
   '/evaluator': typeof EvaluatorRoute
+  '/leaderboard': typeof LeaderboardRoute
   '/portfolio': typeof PortfolioRoute
   '/roadmap': typeof RoadmapRoute
   '/universities': typeof UniversitiesRoute
@@ -86,6 +94,7 @@ export interface FileRoutesById {
   '/auth': typeof AuthRoute
   '/contacts': typeof ContactsRoute
   '/evaluator': typeof EvaluatorRoute
+  '/leaderboard': typeof LeaderboardRoute
   '/portfolio': typeof PortfolioRoute
   '/roadmap': typeof RoadmapRoute
   '/universities': typeof UniversitiesRoute
@@ -98,6 +107,7 @@ export interface FileRouteTypes {
     | '/auth'
     | '/contacts'
     | '/evaluator'
+    | '/leaderboard'
     | '/portfolio'
     | '/roadmap'
     | '/universities'
@@ -108,6 +118,7 @@ export interface FileRouteTypes {
     | '/auth'
     | '/contacts'
     | '/evaluator'
+    | '/leaderboard'
     | '/portfolio'
     | '/roadmap'
     | '/universities'
@@ -118,6 +129,7 @@ export interface FileRouteTypes {
     | '/auth'
     | '/contacts'
     | '/evaluator'
+    | '/leaderboard'
     | '/portfolio'
     | '/roadmap'
     | '/universities'
@@ -129,6 +141,7 @@ export interface RootRouteChildren {
   AuthRoute: typeof AuthRoute
   ContactsRoute: typeof ContactsRoute
   EvaluatorRoute: typeof EvaluatorRoute
+  LeaderboardRoute: typeof LeaderboardRoute
   PortfolioRoute: typeof PortfolioRoute
   RoadmapRoute: typeof RoadmapRoute
   UniversitiesRoute: typeof UniversitiesRoute
@@ -171,6 +184,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof EvaluatorRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/leaderboard': {
+      id: '/leaderboard'
+      path: '/leaderboard'
+      fullPath: '/leaderboard'
+      preLoaderRoute: typeof LeaderboardRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/portfolio': {
       id: '/portfolio'
       path: '/portfolio'
@@ -201,6 +221,7 @@ const rootRouteChildren: RootRouteChildren = {
   AuthRoute: AuthRoute,
   ContactsRoute: ContactsRoute,
   EvaluatorRoute: EvaluatorRoute,
+  LeaderboardRoute: LeaderboardRoute,
   PortfolioRoute: PortfolioRoute,
   RoadmapRoute: RoadmapRoute,
   UniversitiesRoute: UniversitiesRoute,

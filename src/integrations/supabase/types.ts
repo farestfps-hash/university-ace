@@ -236,6 +236,7 @@ export type Database = {
           id: string
           needs_full_aid: boolean
           nuet_score: number | null
+          portfolio_public: boolean
           sat_score: number | null
           target_countries: string[]
           target_major: string | null
@@ -259,6 +260,7 @@ export type Database = {
           id: string
           needs_full_aid?: boolean
           nuet_score?: number | null
+          portfolio_public?: boolean
           sat_score?: number | null
           target_countries?: string[]
           target_major?: string | null
@@ -282,6 +284,7 @@ export type Database = {
           id?: string
           needs_full_aid?: boolean
           nuet_score?: number | null
+          portfolio_public?: boolean
           sat_score?: number | null
           target_countries?: string[]
           target_major?: string | null
@@ -316,7 +319,28 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      get_leaderboard: {
+        Args: { _country?: string }
+        Returns: {
+          act_score: number
+          countries: Json
+          evaluated_at: string
+          full_name: string
+          gpa_unweighted: number
+          grade_level: string
+          high_school: string
+          holistic_score: number
+          is_public: boolean
+          nuet_score: number
+          sat_score: number
+          strengths: Json
+          summary: string
+          target_countries: string[]
+          target_major: string
+          unt_score: number
+          user_id: string
+        }[]
+      }
     }
     Enums: {
       [_ in never]: never
