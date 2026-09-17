@@ -362,7 +362,7 @@ function UniDetails({
   );
 }
 
-function Row({ k, v }: { k: string; v?: string }) {
+function Row({ k, v }: { k: string; v: string | undefined }) {
   if (!v) return null;
   return (
     <div className="rounded-xl bg-secondary/60 px-3 py-2">

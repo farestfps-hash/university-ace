@@ -208,5 +208,8 @@ export const matchUniversities = createServerFn({ method: "POST" })
       },
     ]);
 
-    return parseJson<{ matches: unknown[]; advice: string }>(raw);
+    const parsed = parseJson<{ matches: Array<Record<string, string | number>>; advice: string }>(
+      raw,
+    );
+    return { matches: parsed.matches ?? [], advice: parsed.advice ?? "" };
   });
