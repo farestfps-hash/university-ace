@@ -16,13 +16,13 @@ import {
 export const Route = createFileRoute("/leaderboard")({
   head: () => ({
     meta: [
-      { title: "Лидерборд абитуриентов — Join&Acquire" },
+      { title: "Таблица лидеров абитуриентов — Join&Acquire" },
       {
         name: "description",
         content:
           "Рейтинг холистических баллов абитуриентов по США, Гонконгу, Казахстану и Европе. Открытые портфолио можно изучить целиком.",
       },
-      { property: "og:title", content: "Лидерборд абитуриентов — Join&Acquire" },
+      { property: "og:title", content: "Таблица лидеров абитуриентов — Join&Acquire" },
       {
         property: "og:description",
         content: "Сравните свой холистический балл с другими абитуриентами по странам.",
@@ -79,7 +79,7 @@ function LeaderboardPage() {
   if (!user) {
     return (
       <div className="mx-auto max-w-md px-4 py-24 text-center">
-        <h1 className="text-2xl font-bold">Лидерборд доступен участникам</h1>
+        <h1 className="text-2xl font-bold">Таблица лидеров доступна участникам</h1>
         <p className="mt-2 text-sm text-muted-foreground">
           Войдите, чтобы увидеть рейтинг холистических баллов.
         </p>
@@ -97,7 +97,7 @@ function LeaderboardPage() {
           <Trophy className="size-5" />
         </span>
         <div>
-          <h1 className="text-4xl font-extrabold">Лидерборд</h1>
+          <h1 className="text-4xl font-extrabold">Таблица лидеров</h1>
           <p className="text-sm text-muted-foreground">
             Топ-50 по холистическому баллу. Закрытые профили скрыты замком.
           </p>
@@ -146,16 +146,17 @@ function LeaderboardPage() {
                 <div className="min-w-0 flex-1">
                   <div className="flex items-center gap-2">
                     <span className="truncate font-semibold">
-                      {r.is_public ? (r.full_name ?? "Без имени") : "Скрытый профиль"}
+                      {r.full_name ?? "Без имени"}
                     </span>
                     {!r.is_public && <Lock className="size-3.5 text-muted-foreground" />}
                     {mine && <Badge className="rounded-full">Вы</Badge>}
                   </div>
                   <p className="truncate text-xs text-muted-foreground">
                     {r.is_public
-                      ? [r.high_school, r.target_major].filter(Boolean).join(" · ") ||
+                      ? [r.high_school, r.city, r.target_major].filter(Boolean).join(" · ") ||
                         "Портфолио открыто"
-                      : "Портфолио закрыто владельцем"}
+                      : [r.high_school, r.city].filter(Boolean).join(" · ") ||
+                        "Портфолио закрыто владельцем"}
                   </p>
                 </div>
                 <span className="text-2xl font-extrabold text-primary">

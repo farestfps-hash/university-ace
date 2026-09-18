@@ -120,6 +120,7 @@ function Portfolio() {
       id: user.id,
       full_name: profile.full_name ?? null,
       high_school: profile.high_school ?? null,
+      city: profile.city ?? null,
       grade_level: profile.grade_level ?? null,
       gpa_unweighted: profile.gpa_unweighted ? Number(profile.gpa_unweighted) : null,
       gpa_weighted: profile.gpa_weighted ? Number(profile.gpa_weighted) : null,
@@ -228,6 +229,13 @@ function Portfolio() {
                 <Input
                   value={profile.high_school ?? ""}
                   onChange={(e) => setProfile({ ...profile, high_school: e.target.value })}
+                />
+              </Field>
+              <Field label="Город">
+                <Input
+                  placeholder="Атырау"
+                  value={profile.city ?? ""}
+                  onChange={(e) => setProfile({ ...profile, city: e.target.value })}
                 />
               </Field>
               <Field label="Класс / Grade">
@@ -380,11 +388,11 @@ function Portfolio() {
                   checked={profile.portfolio_public ?? true}
                   onCheckedChange={(v) => setProfile({ ...profile, portfolio_public: v === true })}
                 />
-                Открытое портфолио в лидерборде
+                Открытое портфолио в таблице лидеров
               </label>
               <p className="mt-1.5 pl-7 text-xs text-muted-foreground">
-                Если включено — ваше имя, школа и результаты видны всем в лидерборде. Если выключено
-                — в рейтинге будет только балл, а профиль отмечен замком как закрытый.
+                Имя, школа, город и общий балл видны всегда. Если выключено — остальные результаты
+                скрыты, а профиль отмечен замком.
               </p>
             </div>
 

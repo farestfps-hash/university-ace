@@ -224,6 +224,7 @@ export type Database = {
           annual_budget: number | null
           bio: string | null
           budget_currency: string | null
+          city: string | null
           created_at: string
           english_score: string | null
           english_test: string | null
@@ -248,6 +249,7 @@ export type Database = {
           annual_budget?: number | null
           bio?: string | null
           budget_currency?: string | null
+          city?: string | null
           created_at?: string
           english_score?: string | null
           english_test?: string | null
@@ -272,6 +274,7 @@ export type Database = {
           annual_budget?: number | null
           bio?: string | null
           budget_currency?: string | null
+          city?: string | null
           created_at?: string
           english_score?: string | null
           english_test?: string | null
@@ -323,6 +326,7 @@ export type Database = {
         Args: { _country?: string }
         Returns: {
           act_score: number
+          city: string
           countries: Json
           evaluated_at: string
           full_name: string

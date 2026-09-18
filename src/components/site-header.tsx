@@ -1,5 +1,5 @@
 import { Link, useNavigate } from "@tanstack/react-router";
-import { Menu, GraduationCap, LogOut, User as UserIcon } from "lucide-react";
+import { Menu, GraduationCap, LogOut, Moon, Sun, User as UserIcon } from "lucide-react";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
@@ -12,6 +12,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { useAuth } from "@/hooks/useAuth";
+import { useTheme } from "@/hooks/useTheme";
 import { cn } from "@/lib/utils";
 
 const NAV = [
@@ -20,13 +21,14 @@ const NAV = [
   { to: "/portfolio", label: "Портфолио & AP" },
   { to: "/roadmap", label: "Дорожная карта" },
   { to: "/universities", label: "Университеты" },
-  { to: "/leaderboard", label: "Лидерборд" },
+  { to: "/leaderboard", label: "Таблица лидеров" },
   { to: "/about", label: "О проекте" },
   { to: "/contacts", label: "Контакты" },
 ] as const;
 
 export function SiteHeader() {
   const { user, signOut } = useAuth();
+  const { theme, toggleTheme } = useTheme();
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
 
@@ -57,6 +59,15 @@ export function SiteHeader() {
         </nav>
 
         <div className="ml-auto flex items-center gap-2">
+          <Button
+            variant="ghost"
+            size="icon"
+            onClick={toggleTheme}
+            aria-label={theme === "dark" ? "Включить светлую тему" : "Включить тёмную тему"}
+            title={theme === "dark" ? "Светлая тема" : "Тёмная тема"}
+          >
+            {theme === "dark" ? <Sun className="size-5" /> : <Moon className="size-5" />}
+          </Button>
           {user ? (
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
