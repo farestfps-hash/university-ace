@@ -99,7 +99,7 @@ function LeaderboardPage() {
         <div>
           <h1 className="text-4xl font-extrabold">Лидерборд</h1>
           <p className="text-sm text-muted-foreground">
-            Холистические баллы абитуриентов. Закрытые профили скрыты замком.
+            Топ-50 по холистическому баллу. Закрытые профили скрыты замком.
           </p>
         </div>
       </div>

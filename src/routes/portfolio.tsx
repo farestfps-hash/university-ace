@@ -135,6 +135,7 @@ function Portfolio() {
       annual_budget: profile.annual_budget ? Number(profile.annual_budget) : null,
       budget_currency: profile.budget_currency ?? "USD",
       needs_full_aid: Boolean(profile.needs_full_aid),
+      portfolio_public: profile.portfolio_public ?? true,
       bio: profile.bio ?? null,
     };
     const { error } = await supabase.from("profiles").upsert(payload);
@@ -371,6 +372,20 @@ function Portfolio() {
                 />
                 Нужна полная финансовая помощь / грант
               </label>
+            </div>
+
+            <div className="rounded-2xl border border-border bg-secondary/40 p-4">
+              <label className="flex cursor-pointer items-center gap-2.5 text-sm font-medium">
+                <Checkbox
+                  checked={profile.portfolio_public ?? true}
+                  onCheckedChange={(v) => setProfile({ ...profile, portfolio_public: v === true })}
+                />
+                Открытое портфолио в лидерборде
+              </label>
+              <p className="mt-1.5 pl-7 text-xs text-muted-foreground">
+                Если включено — ваше имя, школа и результаты видны всем в лидерборде. Если выключено
+                — в рейтинге будет только балл, а профиль отмечен замком как закрытый.
+              </p>
             </div>
 
             <div>
