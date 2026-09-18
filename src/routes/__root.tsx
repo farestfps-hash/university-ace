@@ -12,6 +12,7 @@ import { useEffect, type ReactNode } from "react";
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 import { AuthProvider } from "@/hooks/useAuth";
+import { ThemeProvider } from "@/hooks/useTheme";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { StudymaxChat } from "@/components/studymax-chat";
@@ -132,18 +133,20 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <AuthProvider>
-        <div className="flex min-h-screen flex-col">
-          <SiteHeader />
-          <main className="flex-1">
-            {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
-            <Outlet />
-          </main>
-          <SiteFooter />
-        </div>
-        <StudymaxChat />
-        <Toaster position="top-center" richColors />
-      </AuthProvider>
+      <ThemeProvider>
+        <AuthProvider>
+          <div className="flex min-h-screen flex-col">
+            <SiteHeader />
+            <main className="flex-1">
+              {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
+              <Outlet />
+            </main>
+            <SiteFooter />
+          </div>
+          <StudymaxChat />
+          <Toaster position="top-center" richColors />
+        </AuthProvider>
+      </ThemeProvider>
     </QueryClientProvider>
   );
 }
