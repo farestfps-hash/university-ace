@@ -20,6 +20,7 @@ const NAV = [
   { to: "/portfolio", label: "Портфолио & AP" },
   { to: "/roadmap", label: "Дорожная карта" },
   { to: "/universities", label: "Университеты" },
+  { to: "/leaderboard", label: "Лидерборд" },
   { to: "/about", label: "О проекте" },
   { to: "/contacts", label: "Контакты" },
 ] as const;
