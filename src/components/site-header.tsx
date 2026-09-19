@@ -99,7 +99,10 @@ export function SiteHeader() {
             </DropdownMenu>
           ) : (
             <Button asChild className="rounded-full">
-              <Link to="/auth">Войти / Регистрация</Link>
+              <Link to="/auth">
+                <span className="sm:hidden">Войти</span>
+                <span className="hidden sm:inline">Войти / Регистрация</span>
+              </Link>
             </Button>
           )}
           <Button
