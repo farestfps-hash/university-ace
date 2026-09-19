@@ -71,7 +71,7 @@ function Home() {
               asChild
               size="lg"
               variant="outline"
-              className="rounded-full border-lime bg-lime/10 px-7 text-lime-foreground hover:bg-lime/20"
+              className="rounded-full border-lime bg-lime/10 px-7 text-lime hover:bg-lime/20"
             >
               <Link to="/portfolio">Заполнить портфолио &amp; AP</Link>
             </Button>

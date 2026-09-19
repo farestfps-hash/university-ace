@@ -207,7 +207,7 @@ function Evaluator() {
               icon={CheckCircle2}
               title="Сильные стороны"
               items={evaluation.strengths ?? []}
-              tone="text-lime-foreground"
+              tone="text-lime"
             />
             <FeedbackCard
               icon={AlertTriangle}
@@ -232,27 +232,31 @@ function Evaluator() {
             <div className="mt-6 h-80">
               <ResponsiveContainer width="100%" height="100%">
                 <ScatterChart margin={{ top: 10, right: 20, bottom: 20, left: 0 }}>
-                  <CartesianGrid strokeOpacity={0.2} />
+                  <CartesianGrid stroke="var(--border)" strokeOpacity={0.7} />
                   <XAxis
                     type="number"
                     dataKey="gpa"
                     name="GPA"
                     domain={[2.4, 4]}
-                    tick={{ fontSize: 12 }}
+                    tick={{ fontSize: 12, fill: "var(--muted-foreground)" }}
+                    axisLine={{ stroke: "var(--border)" }}
+                    tickLine={{ stroke: "var(--border)" }}
                   />
                   <YAxis
                     type="number"
                     dataKey="score"
                     name="Profile score"
                     domain={[0, 100]}
-                    tick={{ fontSize: 12 }}
+                    tick={{ fontSize: 12, fill: "var(--muted-foreground)" }}
+                    axisLine={{ stroke: "var(--border)" }}
+                    tickLine={{ stroke: "var(--border)" }}
                   />
                   <ZAxis range={[35, 35]} />
                   <Tooltip cursor={{ strokeDasharray: "3 3" }} />
-                  <Scatter data={CLOUD} fill="oklch(0.55 0.22 264)" fillOpacity={0.25} />
+                  <Scatter data={CLOUD} fill="var(--color-primary)" fillOpacity={0.25} />
                   <Scatter
                     data={[{ gpa: gpa ?? 3.6, score: score }]}
-                    fill="oklch(0.79 0.2 129)"
+                    fill="var(--color-lime)"
                     shape="star"
                   />
                 </ScatterChart>
