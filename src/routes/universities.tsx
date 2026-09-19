@@ -41,7 +41,7 @@ export const Route = createFileRoute("/universities")({
 });
 
 const CLS_STYLE: Record<Odds["classification"], string> = {
-  Safety: "bg-lime/20 text-lime-foreground border-lime/40",
+  Safety: "bg-lime/20 text-lime border-lime/40",
   Match: "bg-primary/10 text-primary border-primary/30",
   Reach: "bg-destructive/10 text-destructive border-destructive/30",
 };

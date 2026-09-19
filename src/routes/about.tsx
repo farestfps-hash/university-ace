@@ -43,7 +43,7 @@ function About() {
       <div className="mt-12 grid gap-5 sm:grid-cols-2">
         {VALUES.map((v) => (
           <div key={v.title} className="surface-card p-7">
-            <span className="flex size-11 items-center justify-center rounded-2xl bg-lime/20 text-lime-foreground">
+            <span className="flex size-11 items-center justify-center rounded-2xl bg-lime/20 text-lime">
               <v.icon className="size-5" />
             </span>
             <h2 className="mt-4 text-lg font-bold">{v.title}</h2>
